@@ -1,13 +1,5 @@
-# Sample Hardhat Project
+# Fogo Subscription Smart Contract Audit
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+This audit tests the functionality and security of the payment transaction precessing smart contract for the fogo.fan platform. 
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
+The SubscriptionContract has a child ReferralCalculator smart contract. This child contract is used to calculate the profit shares of the involved parties (including referral system parties). 
