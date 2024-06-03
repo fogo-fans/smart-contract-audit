@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "ethers": "^6.11.1",
+    "hardhat": "^2.22.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.6",
+    "@uniswap/v3-periphery": "^1.4.4",
+    "dotenv": "^16.4.5"
+  },
+  "scripts": {
+    "slither": "slither ./contracts --solc-remaps '@openzeppelin=node_modules/@openzeppelin @uniswap=node_modules/@uniswap' --exclude naming-convention,external-function,low-level-calls",
+    "toolbox": "docker run -it --rm -v $PWD:/src trailofbits/eth-security-toolbox",
+    "lint": "solhint 'contracts/*.sol'",
+    "lint:fix": "solhint 'contracts/**/*.sol' --fix",
+    "format": "prettier --write ."
+  }
+}
