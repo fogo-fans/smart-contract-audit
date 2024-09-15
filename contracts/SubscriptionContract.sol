@@ -38,7 +38,7 @@ contract SubscriptionContract is ReentrancyGuard {
     IWETH private weth;
     IReferralCalculator public referralCalculator;
 
-    address public CALCULATOR_ADDRESS = 0xA5Ba50C49A2FcA03F5Fe025added1F71b8deA26a;
+    address public CALCULATOR_ADDRESS = 0xf30F6B0C19EB4f02F5f27313Fbf87a9c5896d9BB;
     address private constant ROUTER_ADDRESS = 0xE592427A0AEce92De3Edee1F18E0157C05861564;
     address public constant WMATIC = 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270; // Polygon WMATIC
     address public outputToken = 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359; // USDC Token on Polygon Mainnet
@@ -58,7 +58,7 @@ contract SubscriptionContract is ReentrancyGuard {
         address indexed contentCreator,
         uint256 usdcAmount,
         uint256 indexed offeringId,
-        uint256 userId
+        string userId
     );
 
     modifier onlyOwner() {
@@ -80,7 +80,7 @@ contract SubscriptionContract is ReentrancyGuard {
     struct subscriptionDetails {
         uint256 _contentId;
         address _contentCreator;
-        uint256 _userId;
+        string _userId;
         uint256 _offeringId;
         address _inputToken;
         uint256 _outputAmount;

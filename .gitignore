@@ -14,5 +14,8 @@ package-lock.json
 /coverage
 /coverage.json
 
+# scripts
+/scripts
+
 # Hardhat Ignition default folder for deployments against a local node
 ignition/deployments/chain-31337

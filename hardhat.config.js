@@ -8,7 +8,7 @@ module.exports = {
     hardhat: {
       forking: {
         url: process.env.ALCHEMY_POLYGON_MAINNET_URL,
-        blockNumber: 57547132
+        blockNumber: 61502730
       }
     },
     polygon: {

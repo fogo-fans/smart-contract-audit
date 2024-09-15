@@ -46,7 +46,7 @@ contract ReferralCalculator is IReferralCalculator {
         rewards.grandparentReferralShare = 0;
 
         if (details._yearsVerified < 2 ) {
-            if (details._grandparent != address(0)) {
+            if (details._grandparent != address(0)) { // Grandparent does exists?
                 if (details._parentIsAmbassador) {
                     rewards.parentReferralShare = ambassadorParentShare;
                     rewards.grandparentReferralShare = grandparentShare;
@@ -58,7 +58,7 @@ contract ReferralCalculator is IReferralCalculator {
                     rewards.grandparentReferralShare = grandparentShare;
                 }
             } else {
-                rewards.parentReferralShare = parentShare;
+                rewards.parentReferralShare = details._parentIsAmbassador ? ambassadorParentShare : parentShare;
             }
         }
 

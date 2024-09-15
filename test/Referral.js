@@ -16,9 +16,9 @@ describe("SubscriptionContract", () => {
         const grandparentWallet = ethers.Wallet.createRandom(); 
 
         const parent = parentWallet.address
-        const grandparent = grandparentWallet.address
+        // const grandparent = grandparentWallet.address
         // const parent = zeroAddress;
-        // const grandparent = zeroAddress;
+        const grandparent = zeroAddress;
 
    
         //Impersonate subscriber account
@@ -56,10 +56,11 @@ describe("SubscriptionContract", () => {
         await erc20Contract.connect(subscriber).approve(subscriptionContract.target, erc20InputAmount);
 
 
-        const msgValue = ethers.parseEther("11");
+        const msgValue = ethers.parseEther("30");
         const subscriptionDetails = {
             _contentId: 101,
             _contentCreator: creator.address,
+            _userId: "301",
             _offeringId: 201,
             _inputToken: zeroAddress,
             // _inputToken: usdcAddress,
@@ -68,17 +69,17 @@ describe("SubscriptionContract", () => {
             // _amountInMaximum: msgValue,
             // _amountInMaximum: usdcOutputAmount,
             _amountInMaximum: erc20InputAmount,
-            _gasDeposit: true,
-            _userId: 301
+            _gasDeposit: true
+            //_isTip: true
         };
 
         const referralDetails = {
             _parent: parent,
             _grandparent: grandparent,
-            _yearsVerified: 1, 
+            _yearsVerified: 0, 
             _creatorIsAmbassador: false,
-            _parentIsAmbassador: false,
-            _grandparentIsAmbassador: true
+            _parentIsAmbassador: true,
+            _grandparentIsAmbassador: false
         };
 
         return { subscriptionContract, owner, subscriber, creator, parent, grandparent, msgValue, subscriptionDetails, referralDetails, usdcContract, erc20Contract, erc20Token }
@@ -87,6 +88,8 @@ describe("SubscriptionContract", () => {
     describe('Deployment', function () {
         it('Contract was deployed and subscription payment was processed.', async function () {
             const { subscriptionContract, owner, subscriber, creator, parent, grandparent, msgValue, subscriptionDetails, referralDetails, usdcContract, erc20Token } = await loadFixture(runEveryTime);
+
+            console.log('broker USDC intial balance ==========>', await usdcContract.balanceOf(owner.address));
 
             const subscribeTx = await subscriptionContract.connect(subscriber).subscribe(subscriptionDetails, referralDetails, {value: msgValue} );
             
@@ -154,7 +157,8 @@ describe("SubscriptionContract", () => {
             
             // console.log(`Expected Parent Balance: ${expectedParentBalance.toString()}`);
             // console.log(`Expected Grandparent Balance: ${expectedGrandparentBalance.toString()}`);
-            // console.log(`Expected Broker Balance: ${expectedBrokerBalance.toString()}`);
+            //  console.log(`Expected Broker Balance: ${expectedBrokerBalance.toString()}`);
+            //  console.log(`Initial Broker Balance: ${initialBrokerBalance.toString()}`);
             // console.log(`Expected Creator Balance: ${expectedCreatorBalance.toString()}`);
             // expect(await usdcContract.balanceOf(creator.address)).to.equal(expectedCreatorBalance);
         });
